@@ -24,4 +24,4 @@ sed -i "s/2g/${pJavaMem}/g" /etc/default/puppetserver
 sudo iptables -A INPUT -p tcp --dport 8140 -j ACCEPT
 
 sudo /opt/puppetlabs/bin/puppet resource service puppetserver ensure=running enable=true
-sudo /opt/puppetlabs/bin/puppet agent -t --noop
+sudo /opt/puppetlabs/bin/puppet agent -t

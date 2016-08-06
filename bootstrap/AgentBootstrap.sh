@@ -4,7 +4,6 @@
 
 # puppet server defaults 2G Java memory allocation
 # for dev/test, this can be drastically lowered.
-pJavaMem="512m"
 
 echo "Pulling repo..."
 wget https://apt.puppetlabs.com/puppetlabs-release-pc1-trusty.deb
