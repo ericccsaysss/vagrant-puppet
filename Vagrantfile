@@ -18,7 +18,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     end
 
 
-    config.vm.define "agent", autostart: false do |a|
+    config.vm.define "agent", autostart: true do |a|
       a.vm.box = "ubuntu/trusty64"
       a.vm.hostname = "agent.pdev.local"
       a.vm.network "private_network", ip: "192.168.200.110"

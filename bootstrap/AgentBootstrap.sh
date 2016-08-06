@@ -4,17 +4,18 @@
 
 # puppet server defaults 2G Java memory allocation
 # for dev/test, this can be drastically lowered.
+puppetrepo="puppetlabs-release-pc1-trusty.deb"
 
 echo "Pulling repo..."
-wget https://apt.puppetlabs.com/puppetlabs-release-pc1-trusty.deb
+wget https://apt.puppetlabs.com/${puppetrepo}
 
 echo "Installing repo..."
-sudo dpkg -i puppetlabs-release-pc1-trusty.deb
+sudo dpkg -i ${puppetrepo}
 
 echo "Updating apt..."
 sudo apt-get update
 
-echo "Pulling puppetserver..."
+echo "Pulling puppet..."
 sudo apt-get -y install puppet-agent
 
 # Start the puppet agent
@@ -24,4 +25,7 @@ sudo /opt/puppetlabs/bin/puppet resource service puppet ensure=running enable=tr
 echo "192.168.200.100     puppet" >> /etc/hosts
 
 # Generate certificate with first puppet run
+sudo /opt/puppetlabs/bin/puppet agent -t
+
+# Idempotency test
 sudo /opt/puppetlabs/bin/puppet agent -t
