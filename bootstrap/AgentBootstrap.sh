@@ -25,7 +25,5 @@ sudo /opt/puppetlabs/bin/puppet resource service puppet ensure=running enable=tr
 echo "192.168.200.100     puppet" >> /etc/hosts
 
 # Generate certificate with first puppet run
-sudo /opt/puppetlabs/bin/puppet agent -t
-
-# Idempotency test
+sudo /opt/puppetlabs/bin/puppet agent -t --noop
 sudo /opt/puppetlabs/bin/puppet agent -t

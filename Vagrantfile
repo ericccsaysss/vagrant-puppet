@@ -1,7 +1,7 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 # TODO: pass agent hosts to puppetmaster autosign.configure
-
+# TODO: auto generate hostname,ip when doing multiple agents
 
 VAGRANTFILE_API_VERSION = "2"
 
@@ -16,7 +16,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         vb.customize ["modifyvm", :id, "--memory", "2048"]
       end
     end
-
 
     config.vm.define "agent", autostart: true do |a|
       a.vm.box = "ubuntu/trusty64"

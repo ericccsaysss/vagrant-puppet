@@ -24,5 +24,5 @@ sed -i "s/2g/${pJavaMem}/g" /etc/default/puppetserver
 sudo iptables -A INPUT -p tcp --dport 8140 -j ACCEPT
 
 sudo /opt/puppetlabs/bin/puppet resource service puppetserver ensure=running enable=true
-sudo /opt/puppetlabs/bin/puppet agent -t
 sudo /opt/puppetlabs/bin/puppet apply -e 'file { "/etc/puppetlabs/puppet/autosign.conf": ensure => "present",content => "*.pdev.local\n", mode => "0644"}'
+sudo /opt/puppetlabs/bin/puppet agent -t
