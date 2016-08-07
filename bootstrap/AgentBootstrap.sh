@@ -19,7 +19,7 @@ echo "Pulling puppet..."
 sudo apt-get -y install puppet-agent
 
 # Add puppet to sudoers path
-sudo sed -i 's/:\/bin"/:\/bin:\/\/opt\/puppetlabs\/bin"/g' /etc/sudoers
+sudo sed -i 's/:\/bin"/:\/bin:\/opt\/puppetlabs\/bin"/g' /etc/sudoers
 
 # Start the puppet agent
 sudo puppet resource service puppet ensure=running enable=true
@@ -28,5 +28,5 @@ sudo puppet resource service puppet ensure=running enable=true
 echo "192.168.200.100     puppet" >> /etc/hosts
 
 # Generate certificate with first puppet run
-sudo puppet agent -t --noop
+sudo puppet agent -t
 sudo puppet agent -t

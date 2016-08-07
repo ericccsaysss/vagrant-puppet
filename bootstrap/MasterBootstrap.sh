@@ -19,7 +19,7 @@ echo "Pulling puppetserver..."
 sudo apt-get -y install puppetserver
 
 # Add puppet to sudoers path
-sudo sed -i 's/:\/bin"/:\/bin:\/\/opt\/puppetlabs\/bin"/g' /etc/sudoers
+sudo sed -i 's/:\/bin"/:\/bin:\/opt\/puppetlabs\/bin"/g' /etc/sudoers
 
 sed -i "s/2g/${pJavaMem}/g" /etc/default/puppetserver
 
@@ -33,4 +33,5 @@ sudo puppet resource service puppetserver ensure=running enable=true
 sudo puppet apply -e 'file { "/etc/puppetlabs/puppet/autosign.conf": ensure => "present",content => "*.pdev.local\n", mode => "0644"}'
 
 # Initial puppet agent run
+sudo puppet agent -t
 sudo puppet agent -t
