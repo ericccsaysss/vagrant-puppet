@@ -18,11 +18,14 @@ sudo apt-get update
 echo "Pulling puppetserver..."
 sudo apt-get -y install puppetserver
 
+# Add puppet to sudoers path
+sudo sed -i 's/:\/bin"/:\/bin:\/\/opt\/puppetlabs\/bin"/g' /etc/sudoers
+
 sed -i "s/2g/${pJavaMem}/g" /etc/default/puppetserver
 
 # Open port to allow for agents to talk to server
 sudo iptables -A INPUT -p tcp --dport 8140 -j ACCEPT
 
-sudo /opt/puppetlabs/bin/puppet resource service puppetserver ensure=running enable=true
-sudo /opt/puppetlabs/bin/puppet apply -e 'file { "/etc/puppetlabs/puppet/autosign.conf": ensure => "present",content => "*.pdev.local\n", mode => "0644"}'
-sudo /opt/puppetlabs/bin/puppet agent -t
+sudo puppet resource service puppetserver ensure=running enable=true
+sudo puppet apply -e 'file { "/etc/puppetlabs/puppet/autosign.conf": ensure => "present",content => "*.pdev.local\n", mode => "0644"}'
+sudo puppet agent -t
