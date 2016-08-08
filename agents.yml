@@ -1,0 +1,7 @@
+---
+- name: "agent001.pdev.local"
+  box: "ubuntu/trusty64"
+  ip: "192.168.200.111"
+- name: "agent002.pdev.local"
+  box: "ubuntu/trusty64"
+  ip: "192.168.200.112"
