@@ -29,4 +29,3 @@ echo "192.168.200.100     puppet" >> /etc/hosts
 
 # Generate certificate with first puppet run
 sudo puppet agent -t
-sudo puppet agent -t

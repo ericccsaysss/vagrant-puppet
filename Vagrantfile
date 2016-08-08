@@ -2,9 +2,11 @@
 # vi: set ft=ruby :
 # TODO: pass agent hosts to puppetmaster autosign.configure
 # TODO: auto generate hostname,ip when doing multiple agents
+require 'yaml'
 
 VAGRANTFILE_API_VERSION = "2"
-AGENTS = 2
+AGENTS = YAML.load_file('agents.yml')
+
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
@@ -17,12 +19,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         vb.customize ["modifyvm", :id, "--memory", "2048"]
       end
     end
-  (1..AGENTS).each do |aNum|
-    config.vm.define "agent00#{aNum}", autostart: true do |a|
-      a.vm.box = "ubuntu/trusty64"
-      a.vm.hostname = "agent00#{aNum}.pdev.local"
-      a.vm.network "private_network", ip: "192.168.200.11#{aNum}"
 
+  AGENTS.each do |agent|
+    config.vm.define agent['name'], autostart: true do |a|
+      a.vm.box = agent['box']
+      a.vm.hostname = agent['name']
+      a.vm.network "private_network", ip: agent['ip']
       a.vm.provision "shell", path: "./bootstrap/AgentBootstrap.sh"
     end
   end

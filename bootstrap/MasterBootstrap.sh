@@ -30,8 +30,7 @@ sudo iptables -A INPUT -p tcp --dport 8140 -j ACCEPT
 sudo puppet resource service puppetserver ensure=running enable=true
 
 # Enable puppet master autosigning of wildcard FQDN
-sudo puppet apply -e 'file { "/etc/puppetlabs/puppet/autosign.conf": ensure => "present",content => "*.pdev.local\n", mode => "0644"}'
+sudo puppet apply -e 'file { "/etc/puppetlabs/puppet/autosign.conf": ensure => "present",content => "*", mode => "0644"}'
 
 # Initial puppet agent run
-sudo puppet agent -t
 sudo puppet agent -t
