@@ -25,7 +25,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       a.vm.box = agent['box']
       a.vm.hostname = agent['name']
       a.vm.network "private_network", ip: agent['ip']
-      a.vm.provision "shell", path: "./bootstrap/AgentBootstrap.sh"
+      a.vm.provision "shell", path: "./bootstrap/AgentBootstrap.sh", args: "agent['osfamily']"
     end
   end
 
